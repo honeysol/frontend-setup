@@ -40,7 +40,7 @@ macのインストールは3パターンあり、どれかでいい
 
 - コマンドライン・デベロッパ・ツールをインストール  
 - ダウンロードしてインストール  
-- homebreCでインストール  
+- homebrewでインストール  
 
 ### gitクライアントのインストール
 gitのログを見たり、コミットしたりする時に使うツール  
@@ -63,7 +63,7 @@ https://www.sourcetreeapp.com/
 githubに鍵を登録してなければ、認証失敗する  
 
 #### gitクライアントからgithubへの接続を確認
-自分のアカウントでリポジトリ作ればテストし放題なので、必ずpull~commit~pushの手順を確認する  
+自分のアカウントでリポジトリ作ればテストし放題なので、必ずpull〜commit〜pushの手順を確認する  
 認証まわりでうまくいかないことが多い  
 [SourceTreeとGithubでGitの練習環境をつくる](https://qiita.com/naoki85/items/4f44601f1365c18035f4)  
 [GitHubとSourceTreeを使って簡単にGitの開発手順を説明するよ！](https://high-programmer.com/2018/08/30/github_sourcetree_flow/)  
@@ -79,9 +79,42 @@ githubに鍵を登録してなければ、認証失敗する
 プロジェクトごとにnodeのversionをわけることが多いので、  
 まずはnodeのversionを選択できるようにする  
 
-### versionを固定
+#### インストール
+homebrewでインストール、またはshでインストールする  
+[nvmをHomebrewでインストールしてみました](http://furudate.hatenablog.com/entry/2015/02/06/003422)  
+[nvm + Node.js + npmのインストール](https://qiita.com/sansaisoba/items/242a8ba95bf70ba179d3)  
+
+#### .bash_profile追記
+`.bash_profile(または.bashrc)` の追記を忘れないこと  
+追記を忘れると、ターミナル再起動時にnvm,nodeが参照できない状態になる  
+
+```
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+```
+
+#### node8.10.0のインストールとversionの固定
+```
+nvm install 8.10.0
+nvm use 8.10.0
+nvm alias default 8.10.0
+```
+
+alias defaultの設定を忘れると、ターミナル再起動時に指定が初期設定に戻る  
+`node -v` で `v8.10.0` が表示されれば完了  
 
 
 ## プロジェクトの読み込み
 ### githubからのclone
+gitクライアントによる  
+
+### 開発ブランチの切り替えと、新規ブランチの作成
+開発ブランチ（またはmasterブランチ）を元に、新しい開発用のブランチを作成し、作業をする  
+[【連載Git入門 第3回】SourceTreeでGitを始めよう！ブランチを切ってみよう](https://naichilab.blogspot.com/2014/01/git-3sourcetreegit.html)  
+***どのブランチを元にするかは、必ず確認する***  
+
+### プロジェクトの初期準備
+clone後、ローカルのプロジェクトのルートディレクトリにて、  
+`npm install` すると、必要なライブラリがインストールされ、開発の準備はほぼ完了  
+ビルドを実行し(やり方はプロジェクトにより異なる)、動作確認をする  
 
